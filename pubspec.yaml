@@ -1,0 +1,49 @@
+name: paisa_path
+description: "An expense tracker app built with flutter."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+  
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  google_fonts: ^6.1.0
+  get: ^4.6.6
+
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  flutter_lang:
+    path: ../flutter_lang/flutter_lang/
+  restart_app: ^1.2.1
+  
+  shared_preferences: ^2.2.2
+  in_app_update: ^4.2.2
+  floor: ^1.4.2
+  fl_chart: ^0.66.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+  flutter_launcher_icons: ^0.13.1
+  floor_generator: ^1.4.2
+
+  build_runner: ^2.4.7
+
+# flutter_launcher_icons:
+#   android: "launcher_icon"
+#   ios: true
+#   image_path: "assets/images/roll-call-logo.png"
+#   remove_alpha_ios: true
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/

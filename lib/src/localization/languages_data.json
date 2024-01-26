@@ -1,0 +1,246 @@
+{
+    "available_languages": [
+        {
+            "name": "English",
+            "code": "en"
+        },
+        {
+            "name": "Hindi",
+            "code": "hi"
+        }
+    ],
+    "localization_data": [
+        {
+            "key": "appName",
+            "values": {
+                "en": "Paisa Path",
+                "hi": "पैसा पथ"
+            },
+            "description": "Application title"
+        },
+        {
+            "key": "changeLanguage",
+            "values": {
+                "en": "Change Language",
+                "hi": "भाषा बदलो"
+            },
+            "description": "A label on the button to change language"
+        },
+        {
+            "key": "yourLanguageIsSetTo",
+            "values": {
+                "en": "Your language is set to %s",
+                "hi": "आपकी भाषा सेट है %s"
+            },
+            "description": "A label to show the current language"
+        },
+        {
+            "key": "expenseEntry",
+            "values": {
+                "en": "Expense Entry",
+                "hi": "व्यय प्रविष्टि"
+            },
+            "description": "Title of expense entry screen"
+        },
+        {
+            "key": "amount",
+            "values": {
+                "en": "Amount",
+                "hi": "रकम"
+            },
+            "description": ""
+        },
+        {
+            "key": "description",
+            "values": {
+                "en": "Description",
+                "hi": "विवरण"
+            },
+            "description": ""
+        },
+        {
+            "key": "save",
+            "values": {
+                "en": "Save",
+                "hi": "सहेजें"
+            },
+            "description": "Save button label"
+        },
+        {
+            "key": "update",
+            "values": {
+                "en": "Update",
+                "hi": "अपडेट करें"
+            },
+            "description": "Update button label"
+        },
+        {
+            "key": "type",
+            "values": {
+                "en": "Type",
+                "hi": "प्रकार"
+            },
+            "description": "Type of Expense label in expense entry screen"
+        },
+        {
+            "key": "delete",
+            "values": {
+                "en": "Delete",
+                "hi": "हटाएं"
+            },
+            "description": ""
+        },
+        {
+            "key": "cancel",
+            "values": {
+                "en": "Cancel",
+                "hi": "रद्द करें"
+            },
+            "description": ""
+        },
+        {
+            "key": "notSelected",
+            "values": {
+                "en": "Not selected",
+                "hi": "चयनित नहीं"
+            },
+            "description": ""
+        },
+        {
+            "key": "deleteExpense",
+            "values": {
+                "en": "Delete Expense?",
+                "hi": "व्यय हटाएं?"
+            },
+            "description": "Expense delete confirmation dialog title"
+        },
+        {
+            "key": "deleteExpenseMessage",
+            "values": {
+                "en": "Are you sure to delete this expense (%s)?",
+                "hi": "क्या आप वाकई इस व्यय (%s) को हटाना चाहते हैं?"
+            },
+            "description": "Expense delete confirmation dialog message"
+        },
+        {
+            "key": "today",
+            "values": {
+                "en": "Today",
+                "hi": "आज"
+            },
+            "description": ""
+        },
+        {
+            "key": "yesterday",
+            "values": {
+                "en": "Yesterday",
+                "hi": "कल"
+            },
+            "description": ""
+        },
+        {
+            "key": "thisWeek",
+            "values": {
+                "en": "This Week",
+                "hi": "इस सप्ताह"
+            },
+            "description": ""
+        },
+        {
+            "key": "lastWeek",
+            "values": {
+                "en": "Last Week",
+                "hi": "पिछले सप्ताह"
+            },
+            "description": ""
+        },
+        {
+            "key": "thisMonth",
+            "values": {
+                "en": "This Month",
+                "hi": "इस महीने"
+            },
+            "description": ""
+        },
+        {
+            "key": "lastMonth",
+            "values": {
+                "en": "Last Month",
+                "hi": "पिछले महीने"
+            },
+            "description": ""
+        },
+        {
+            "key": "thisYear",
+            "values": {
+                "en": "This Year",
+                "hi": "इस साल"
+            },
+            "description": ""
+        },
+        {
+            "key": "lastYear",
+            "values": {
+                "en": "Last Year",
+                "hi": "पिछले साल"
+            },
+            "description": ""
+        },
+        {
+            "key": "allTime",
+            "values": {
+                "en": "All Time",
+                "hi": "सभी समय"
+            },
+            "description": ""
+        },
+        {
+            "key": "custom",
+            "values": {
+                "en": "Custom",
+                "hi": "कस्टम"
+            },
+            "description": ""
+        },
+        {
+            "key": "from",
+            "values": {
+                "en": "From",
+                "hi": "से"
+            },
+            "description": ""
+        },
+        {
+            "key": "to",
+            "values": {
+                "en": "To",
+                "hi": "तक"
+            },
+            "description": ""
+        },
+        {
+            "key": "viewAll",
+            "values": {
+                "en": "View All",
+                "hi": "सभी देखें"
+            },
+            "description": ""
+        },
+        {
+            "key": "expenses",
+            "values": {
+                "en": "Expenses",
+                "hi": "व्यय"
+            },
+            "description": ""
+        },
+        {
+            "key": "noExpenses",
+            "values": {
+                "en": "No expenses yet. Keep it up!",
+                "hi": "अभी तक कोई व्यय नहीं। इसे जारी रखें!"
+            },
+            "description": ""
+        }
+    ]
+}
