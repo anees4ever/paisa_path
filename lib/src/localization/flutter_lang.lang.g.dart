@@ -49,6 +49,15 @@ final class FlutterLanguageEN extends FlutterLanguage {
   String get deleteExpenseMessage => "Are you sure to delete this expense (%s)?"; 
 
   @override 
+  String get sort => "Sort"; 
+
+  @override 
+  String get total => "Total"; 
+
+  @override 
+  String get filter => "Filter"; 
+
+  @override 
   String get today => "Today"; 
 
   @override 
@@ -89,6 +98,12 @@ final class FlutterLanguageEN extends FlutterLanguage {
 
   @override 
   String get expenses => "Expenses"; 
+
+  @override 
+  String get others => "Others"; 
+
+  @override 
+  String get uncategorized => "Uncategorized"; 
 
   @override 
   String get noExpenses => "No expenses yet. Keep it up!"; 
@@ -143,6 +158,15 @@ final class FlutterLanguageHI extends FlutterLanguage {
   String get deleteExpenseMessage => "क्या आप वाकई इस व्यय (%s) को हटाना चाहते हैं?"; 
 
   @override 
+  String get sort => "क्रमबद्ध करें"; 
+
+  @override 
+  String get total => "कुल"; 
+
+  @override 
+  String get filter => "फिल्टर"; 
+
+  @override 
   String get today => "आज"; 
 
   @override 
@@ -183,6 +207,12 @@ final class FlutterLanguageHI extends FlutterLanguage {
 
   @override 
   String get expenses => "व्यय"; 
+
+  @override 
+  String get others => "अन्य"; 
+
+  @override 
+  String get uncategorized => "अवर्गीकृत"; 
 
   @override 
   String get noExpenses => "अभी तक कोई व्यय नहीं। इसे जारी रखें!"; 

@@ -123,6 +123,30 @@
             "description": "Expense delete confirmation dialog message"
         },
         {
+            "key": "sort",
+            "values": {
+                "en": "Sort",
+                "hi": "क्रमबद्ध करें"
+            },
+            "description": ""
+        },
+        {
+            "key": "total",
+            "values": {
+                "en": "Total",
+                "hi": "कुल"
+            },
+            "description": ""
+        },
+        {
+            "key": "filter",
+            "values": {
+                "en": "Filter",
+                "hi": "फिल्टर"
+            },
+            "description": ""
+        },
+        {
             "key": "today",
             "values": {
                 "en": "Today",
@@ -231,6 +255,22 @@
             "values": {
                 "en": "Expenses",
                 "hi": "व्यय"
+            },
+            "description": ""
+        },
+        {
+            "key": "others",
+            "values": {
+                "en": "Others",
+                "hi": "अन्य"
+            },
+            "description": ""
+        },
+        {
+            "key": "uncategorized",
+            "values": {
+                "en": "Uncategorized",
+                "hi": "अवर्गीकृत"
             },
             "description": ""
         },

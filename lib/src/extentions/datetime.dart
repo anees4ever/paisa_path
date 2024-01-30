@@ -22,4 +22,12 @@ extension DateTimeExt on DateTime {
     other ??= DateTime.now();
     return year == other.year && month == other.month && day == other.day;
   }
+
+  String formattedDate() {
+    return format('dd/MM/yyyy');
+  }
+
+  String formattedTime() {
+    return format('HH:mm:ss');
+  }
 }

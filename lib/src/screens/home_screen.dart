@@ -39,11 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: _pageController,
                 allowImplicitScrolling: false,
                 physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  const DashboardScreen(),
+                children: const [
+                  DashboardScreen(),
                   SummaryScreen(),
-                  const Text('Page 3'),
-                  const Text('Page 4'),
+                  Text('Page 3'),
+                  Text('Page 4'),
                 ],
               ),
             ),
@@ -52,8 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.large(
-        onPressed: () {
-          ExpenseEntryScreen.show(null);
+        onPressed: () async {
+          bool? result = await ExpenseEntryScreen.show(null);
+          if (result ?? false) {
+            currentPage = 0;
+          }
         },
         shape: const CircleBorder(
           side: BorderSide(
@@ -66,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
+        height: 48,
         shape: const CircularNotchedRectangle(), //shape of notch
         notchMargin: 12,
         child: Row(

@@ -17,8 +17,8 @@ class ExpenseEntryScreen extends StatefulWidget {
   @override
   State<ExpenseEntryScreen> createState() => _ExpenseEntryScreenState();
 
-  static Future<void> show(Expenses? expense) async {
-    return await showModalBottomSheet(
+  static Future<bool?> show(Expenses? expense) async {
+    return await showModalBottomSheet<bool>(
         context: Get.context!,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
@@ -158,8 +158,8 @@ class _ExpenseEntryScreenState extends State<ExpenseEntryScreen> {
               Expanded(
                 child: Text(
                   widget.expense == null
-                      ? DateTime.now().formatDateTime()
-                      : widget.expense!.trnDateTime.formatDateTime(),
+                      ? DateTime.now().formatLocal()
+                      : widget.expense!.trnDateTime.formatLocal(),
                   textAlign: TextAlign.end,
                   style: textStyleContent,
                 ),
@@ -200,7 +200,7 @@ class _ExpenseEntryScreenState extends State<ExpenseEntryScreen> {
         expenseType,
         descriptionController.text);
     if (result) {
-      Get.back();
+      Get.back(result: true);
     }
   }
 }

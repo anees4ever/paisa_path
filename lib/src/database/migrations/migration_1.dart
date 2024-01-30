@@ -11,9 +11,12 @@ final migration_1 = Migration(1, 2, (database) async {
     'Education',
     'Other'
   ];
+  String query =
+      'INSERT INTO expense_types (id, name, description, showOrder) VALUES ';
   for (String expenseType in expenseTypes) {
     int index = expenseTypes.indexOf(expenseType) + 1;
-    await database.execute(
-        "INSERT INTO expense_types (id, name, description, showOrder) VALUES ($index, '$expenseType', '', $index)");
+    query += '($index, "$expenseType", "", $index),';
   }
+  query = query.substring(0, query.length - 1);
+  await database.execute(query);
 });

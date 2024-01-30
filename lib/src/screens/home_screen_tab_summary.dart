@@ -1,162 +1,192 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:get/get.dart';
-import 'package:paisa_path/src/controllers/expenses_controller.dart';
+import 'package:paisa_path/src/controllers/summary_controller.dart';
+import 'package:paisa_path/src/extentions/datetime.dart';
 import 'package:paisa_path/src/extentions/double.dart';
+import 'package:paisa_path/src/localization/flutter_lang.dart';
+import 'package:paisa_path/src/screens/custom_widgets/date_picker.dart';
+import 'package:paisa_path/src/screens/custom_widgets/textfield.dart';
 import 'package:paisa_path/src/theme/colors.dart';
 import 'package:paisa_path/src/theme/styles.dart';
 
 class SummaryScreen extends StatelessWidget {
-  SummaryScreen({super.key});
-
-  int touchedIndex = -1;
-
-  ExpensesController controller = Get.find();
+  const SummaryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: PieChart(
-              PieChartData(
-                pieTouchData: PieTouchData(
-                  touchCallback: (FlTouchEvent event, pieTouchResponse) {},
+    final SummaryController summaryController = Get.put(SummaryController())
+      ..generateSummary();
+    TextEditingController filterTypeController = TextEditingController(
+      text: summaryController.filterType.value.label,
+    );
+    TextEditingController fromDateController = TextEditingController();
+    TextEditingController toDateController = TextEditingController();
+    return AspectRatio(
+      aspectRatio: 1.3,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: EditBox(
+                  labelText: Strings.current.filter,
+                  readOnly: true,
+                  controller: filterTypeController,
+                  suffixIcon: Icons.arrow_drop_down,
+                  onTap: () {
+                    summaryController.showDateFilter(
+                      (p0) {
+                        fromDateController.text =
+                            summaryController.fromDate.value.formattedDate();
+                        toDateController.text =
+                            summaryController.toDate.value.formattedDate();
+                        return filterTypeController.text = p0.label;
+                      },
+                    );
+                  },
                 ),
-                startDegreeOffset: 180,
-                borderData: FlBorderData(
-                  show: false,
+              ),
+              const Expanded(
+                child: SizedBox(),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: DatePicker(
+                  label: Strings.current.from,
+                  controller: fromDateController,
                 ),
-                sectionsSpace: 1,
-                centerSpaceRadius: 70,
-                sections: showingSections(),
+              ),
+              Expanded(
+                child: DatePicker(
+                  label: Strings.current.to,
+                  controller: toDateController,
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  GetX<SummaryController>(builder: (_) {
+                    return PieChart(
+                      PieChartData(
+                        pieTouchData: PieTouchData(
+                          touchCallback:
+                              (FlTouchEvent event, pieTouchResponse) {},
+                        ),
+                        startDegreeOffset: 180,
+                        borderData: FlBorderData(
+                          show: false,
+                        ),
+                        sectionsSpace: 1,
+                        centerSpaceRadius: 100,
+                        sections: getChartSections(summaryController),
+                      ),
+                    );
+                  }),
+                  Align(
+                    alignment: Alignment.center,
+                    child: GetX<SummaryController>(builder: (_) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            Strings.current.total,
+                            style: textStyleSubtitle.copyWith(
+                              color: fontColorError.theme,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            summaryController.totalAmount.amount(),
+                            style: textStyleTitle.copyWith(
+                              color: fontColorError.theme,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
+                ],
               ),
             ),
           ),
-        ),
-        const SizedBox(
-          height: 28,
-        ),
-        Expanded(
-          child: GridView.count(
-            crossAxisCount: 2,
-            childAspectRatio: 2.5,
-            shrinkWrap: true,
-            children: controller.expenseTypes.map((element) {
-              int index = controller.expenseTypes.indexOf(element);
-              return Card(
-                color: chartColor(index),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      element.name,
-                      style: textStyleSubtitle.copyWith(color: fontColorDark),
-                    ),
-                    Text(
-                      200.00.amount(),
-                      style: textStyleSubtitle.copyWith(
-                        color: fontColorDark,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
+          const SizedBox(
+            height: 28,
           ),
-        ),
-      ],
+          Expanded(
+            child: GetX<SummaryController>(builder: (_) {
+              return GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: 2.5,
+                shrinkWrap: true,
+                children: summaryController.summaryItems
+                    .where((element) => element.amount != 0)
+                    .map((element) {
+                  int index = summaryController.summaryItems.indexOf(element);
+                  return Card(
+                    color: ChartColors.get(index),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          element.typeName,
+                          style:
+                              textStyleSubtitle.copyWith(color: fontColorDark),
+                        ),
+                        Text(
+                          element.amount.amount(),
+                          style: textStyleSubtitle.copyWith(
+                            color: fontColorDark,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              );
+            }),
+          ),
+        ],
+      ),
     );
   }
 
-  List<PieChartSectionData> showingSections() {
-    return controller.expenseTypes.map((element) {
-      int index = controller.expenseTypes.indexOf(element);
+  List<PieChartSectionData> getChartSections(SummaryController controller) {
+    double total = controller.summaryItems
+        .fold(0, (previousValue, element) => previousValue + element.amount);
+    if (total == 0) {
+      return [
+        PieChartSectionData(
+          color: Colors.grey,
+          value: 1,
+          title: '',
+          radius: 30,
+          titlePositionPercentageOffset: 0.55,
+          borderSide: BorderSide(color: Colors.white.withOpacity(0)),
+        )
+      ];
+    }
+    return controller.summaryItems.map((element) {
+      int index = controller.summaryItems.indexOf(element);
       return PieChartSectionData(
-        color: chartColor(index),
-        value: 10 * (index + 1).toDouble(),
+        color: ChartColors.get(index),
+        value: element.amount,
         title: '',
-        radius: 80,
+        radius: 30,
         titlePositionPercentageOffset: 0.55,
-        borderSide: index == touchedIndex
-            ? const BorderSide(color: Colors.white, width: 6)
-            : BorderSide(color: Colors.white.withOpacity(0)),
+        borderSide: BorderSide(color: Colors.white.withOpacity(0)),
       );
     }).toList();
-  }
-}
-
-//Unlimited list of colors for the chart by index
-Color chartColor(int index) {
-  switch (index % 10) {
-    case 0:
-      return ChartColors.contentColorBlue;
-    case 1:
-      return ChartColors.contentColorYellow;
-    case 2:
-      return ChartColors.contentColorPink;
-    case 3:
-      return ChartColors.contentColorGreen;
-    case 4:
-      return ChartColors.contentColorPurple;
-    case 5:
-      return ChartColors.contentColorOrange;
-    case 6:
-      return ChartColors.contentColorRed;
-    case 7:
-      return ChartColors.contentColorCyan;
-    case 8:
-      return ChartColors.contentColorBlue;
-    case 9:
-      return ChartColors.contentColorYellow;
-    default:
-      throw Error();
-  }
-}
-
-class Indicator extends StatelessWidget {
-  const Indicator({
-    super.key,
-    required this.color,
-    required this.text,
-    required this.isSquare,
-    this.size = 16,
-    this.textColor,
-  });
-  final Color color;
-  final String text;
-  final bool isSquare;
-  final double size;
-  final Color? textColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Container(
-          width: size,
-          height: size,
-          decoration: BoxDecoration(
-            shape: isSquare ? BoxShape.rectangle : BoxShape.circle,
-            color: color,
-          ),
-        ),
-        const SizedBox(
-          width: 4,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: textColor,
-          ),
-        )
-      ],
-    );
   }
 }
 
@@ -171,4 +201,31 @@ class ChartColors {
   static const Color contentColorPink = Color(0xFFFF3AF2);
   static const Color contentColorRed = Color(0xFFE80054);
   static const Color contentColorCyan = Color(0xFF50E4FF);
+
+  static Color get(int index) {
+    switch (index % 10) {
+      case 0:
+        return ChartColors.contentColorBlue;
+      case 1:
+        return ChartColors.contentColorYellow;
+      case 2:
+        return ChartColors.contentColorPink;
+      case 3:
+        return ChartColors.contentColorGreen;
+      case 4:
+        return ChartColors.contentColorPurple;
+      case 5:
+        return ChartColors.contentColorOrange;
+      case 6:
+        return ChartColors.contentColorRed;
+      case 7:
+        return ChartColors.contentColorCyan;
+      case 8:
+        return ChartColors.contentColorBlue;
+      case 9:
+        return ChartColors.contentColorYellow;
+      default:
+        throw Error();
+    }
+  }
 }

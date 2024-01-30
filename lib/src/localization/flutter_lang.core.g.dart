@@ -104,6 +104,15 @@ abstract class FlutterLanguage {
   /// [en]: **'Are you sure to delete this expense (%s)?'**
   String get deleteExpenseMessage;
 
+  /// [en]: **'Sort'**
+  String get sort;
+
+  /// [en]: **'Total'**
+  String get total;
+
+  /// [en]: **'Filter'**
+  String get filter;
+
   /// [en]: **'Today'**
   String get today;
 
@@ -145,6 +154,12 @@ abstract class FlutterLanguage {
 
   /// [en]: **'Expenses'**
   String get expenses;
+
+  /// [en]: **'Others'**
+  String get others;
+
+  /// [en]: **'Uncategorized'**
+  String get uncategorized;
 
   /// [en]: **'No expenses yet. Keep it up!'**
   String get noExpenses;
