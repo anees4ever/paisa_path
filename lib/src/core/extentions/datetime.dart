@@ -10,7 +10,15 @@ extension DateTimeExt on DateTime {
     return format('dd/MM/yyyy');
   }
 
-  String formatTime() {
+  String dbDate() {
+    return format('yyyy-MM-dd');
+  }
+
+  String dbDateTime() {
+    return format('yyyy-MM-dd HH:mm:ss');
+  }
+
+  String dbTime() {
     return format('HH:mm:ss');
   }
 

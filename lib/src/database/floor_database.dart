@@ -31,7 +31,7 @@ abstract class AppDatabase extends FloorDatabase {
 
 getFloorDatabase() async {
   return await $FloorAppDatabase
-      .databaseBuilder('paisa_path_data.db')
+      .databaseBuilder('paisa_path_database.db')
       .addCallback(Callback(
     onCreate: (database, version) {
       migration_1.migrate(database);

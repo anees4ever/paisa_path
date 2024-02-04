@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "761692959209",
+    "project_id": "a4e-flutter-apps",
+    "storage_bucket": "a4e-flutter-apps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761692959209:android:f698cfc326b88e89c39b78",
+        "android_client_info": {
+          "package_name": "com.anees4ever.paisa_path"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ5kqodxypTwOBYJcEMF-ewC1v7MVdhgI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

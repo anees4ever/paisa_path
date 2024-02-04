@@ -1,6 +1,6 @@
 import 'dart:io' show Platform;
 
-import 'package:paisa_path/src/theme/colors.dart';
+import 'package:paisa_path/src/core/theme/colors.dart';
 import 'package:paisa_path/src/screens/custom_widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_update/in_app_update.dart';

@@ -89,7 +89,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `expense_types` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `showOrder` INTEGER NOT NULL)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `expenses` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `expenseTypeId` INTEGER NOT NULL, `description` TEXT NOT NULL, `amount` REAL NOT NULL, `trnDateTime` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `modifiedAt` INTEGER NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `expenses` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `expenseTypeId` INTEGER NOT NULL, `description` TEXT NOT NULL, `amount` REAL NOT NULL, `trnDateTime` TEXT NOT NULL, `createdAt` TEXT NOT NULL, `modifiedAt` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -209,9 +209,9 @@ class _$ExpensesDao extends ExpensesDao {
                   'expenseTypeId': item.expenseTypeId,
                   'description': item.description,
                   'amount': item.amount,
-                  'trnDateTime': _dateTimeConverter.encode(item.trnDateTime),
-                  'createdAt': _dateTimeConverter.encode(item.createdAt),
-                  'modifiedAt': _dateTimeConverter.encode(item.modifiedAt)
+                  'trnDateTime': item.trnDateTime,
+                  'createdAt': item.createdAt,
+                  'modifiedAt': item.modifiedAt
                 }),
         _expensesUpdateAdapter = UpdateAdapter(
             database,
@@ -222,9 +222,9 @@ class _$ExpensesDao extends ExpensesDao {
                   'expenseTypeId': item.expenseTypeId,
                   'description': item.description,
                   'amount': item.amount,
-                  'trnDateTime': _dateTimeConverter.encode(item.trnDateTime),
-                  'createdAt': _dateTimeConverter.encode(item.createdAt),
-                  'modifiedAt': _dateTimeConverter.encode(item.modifiedAt)
+                  'trnDateTime': item.trnDateTime,
+                  'createdAt': item.createdAt,
+                  'modifiedAt': item.modifiedAt
                 }),
         _expensesDeletionAdapter = DeletionAdapter(
             database,
@@ -235,9 +235,9 @@ class _$ExpensesDao extends ExpensesDao {
                   'expenseTypeId': item.expenseTypeId,
                   'description': item.description,
                   'amount': item.amount,
-                  'trnDateTime': _dateTimeConverter.encode(item.trnDateTime),
-                  'createdAt': _dateTimeConverter.encode(item.createdAt),
-                  'modifiedAt': _dateTimeConverter.encode(item.modifiedAt)
+                  'trnDateTime': item.trnDateTime,
+                  'createdAt': item.createdAt,
+                  'modifiedAt': item.modifiedAt
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -261,9 +261,20 @@ class _$ExpensesDao extends ExpensesDao {
             expenseTypeId: row['expenseTypeId'] as int,
             description: row['description'] as String,
             amount: row['amount'] as double,
-            trnDateTime: _dateTimeConverter.decode(row['trnDateTime'] as int),
-            createdAt: _dateTimeConverter.decode(row['createdAt'] as int),
-            modifiedAt: _dateTimeConverter.decode(row['modifiedAt'] as int)));
+            trnDateTime: row['trnDateTime'] as String,
+            createdAt: row['createdAt'] as String,
+            modifiedAt: row['modifiedAt'] as String));
+  }
+
+  @override
+  Future<List<Expenses>> listExpensesInPeriod(
+    String fromDate,
+    String toDate,
+  ) async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM expenses WHERE DATE(trnDateTime) BETWEEN ?1 AND ?2 ORDER BY trnDateTime DESC',
+        mapper: (Map<String, Object?> row) => Expenses(id: row['id'] as int?, expenseTypeId: row['expenseTypeId'] as int, description: row['description'] as String, amount: row['amount'] as double, trnDateTime: row['trnDateTime'] as String, createdAt: row['createdAt'] as String, modifiedAt: row['modifiedAt'] as String),
+        arguments: [fromDate, toDate]);
   }
 
   @override
@@ -274,9 +285,9 @@ class _$ExpensesDao extends ExpensesDao {
             expenseTypeId: row['expenseTypeId'] as int,
             description: row['description'] as String,
             amount: row['amount'] as double,
-            trnDateTime: _dateTimeConverter.decode(row['trnDateTime'] as int),
-            createdAt: _dateTimeConverter.decode(row['createdAt'] as int),
-            modifiedAt: _dateTimeConverter.decode(row['modifiedAt'] as int)),
+            trnDateTime: row['trnDateTime'] as String,
+            createdAt: row['createdAt'] as String,
+            modifiedAt: row['modifiedAt'] as String),
         arguments: [id]);
   }
 

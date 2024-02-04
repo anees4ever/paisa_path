@@ -1,6 +1,7 @@
-import 'package:paisa_path/src/localization/flutter_lang.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.dart';
 
 enum FilterDateTypes {
+  any,
   today,
   yesterday,
   thisWeek,
@@ -13,6 +14,8 @@ enum FilterDateTypes {
 
   String get label {
     switch (this) {
+      case FilterDateTypes.any:
+        return Strings.current.allTime;
       case FilterDateTypes.today:
         return Strings.current.today;
       case FilterDateTypes.yesterday:

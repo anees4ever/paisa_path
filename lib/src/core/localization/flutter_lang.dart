@@ -1,10 +1,10 @@
 import 'package:flutter_lang/src_new/annotations.dart';
 import 'package:get/route_manager.dart';
-import 'package:paisa_path/src/localization/flutter_lang.core.g.dart';
-import 'package:paisa_path/src/localization/flutter_lang.lang.g.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.core.g.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.lang.g.dart';
 
 @FlutterLangSingleton.local(
-  localFile: './lib/src/localization/languages_data.json',
+  localFile: './assets/languages_data.json',
   defaultLanguage: 'en',
   stateManagement: StateManagement.NONE,
 )

@@ -11,6 +11,12 @@ extension StringExt on String {
     return isEmpty ? DateTime.now() : DateFormat('dd/MM/yyyy').parse(this);
   }
 
+  DateTime toDateTime() {
+    return isEmpty
+        ? DateTime.now()
+        : DateFormat('yyyy-MM-dd HH:mm:ss').parse(this);
+  }
+
   toDBDate() {
     return isEmpty ? '' : DateFormat('yyyy-MM-dd').format(toDate());
   }

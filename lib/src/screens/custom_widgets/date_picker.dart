@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paisa_path/src/extentions/datetime.dart';
+import 'package:paisa_path/src/core/extentions/datetime.dart';
 import 'package:paisa_path/src/screens/custom_widgets/textfield.dart';
 
 class DatePicker extends StatelessWidget {
@@ -45,7 +45,7 @@ class DatePicker extends StatelessWidget {
 
 class TimePicker extends StatelessWidget {
   const TimePicker({
-    Key? key,
+    super.key,
     required this.label,
     this.onSelected,
     this.initialTime,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:paisa_path/src/di.dart';
-import 'package:paisa_path/src/localization/flutter_lang.core.g.dart';
-import 'package:paisa_path/src/localization/flutter_lang.dart';
-import 'package:paisa_path/src/theme/colors.dart';
+import 'package:paisa_path/di.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.core.g.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.dart';
+import 'package:paisa_path/src/core/theme/colors.dart';
 import 'package:paisa_path/src/screens/custom_widgets/app_scaffold.dart';
 import 'package:restart_app/restart_app.dart';
 

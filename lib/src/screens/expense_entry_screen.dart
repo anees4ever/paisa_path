@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paisa_path/src/controllers/expenses_controller.dart';
-import 'package:paisa_path/src/extentions/datetime.dart';
-import 'package:paisa_path/src/extentions/double.dart';
-import 'package:paisa_path/src/localization/flutter_lang.dart';
-import 'package:paisa_path/src/models/expense_types_model.dart';
+import 'package:paisa_path/src/core/extentions/datetime.dart';
+import 'package:paisa_path/src/core/extentions/double.dart';
+import 'package:paisa_path/src/core/extentions/strings.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.dart';
 import 'package:paisa_path/src/models/expenses_model.dart';
 import 'package:paisa_path/src/screens/custom_widgets/buttons.dart';
+import 'package:paisa_path/src/screens/custom_widgets/custom_dropdown.dart';
+import 'package:paisa_path/src/screens/custom_widgets/date_picker.dart';
 import 'package:paisa_path/src/screens/custom_widgets/textfield.dart';
-import 'package:paisa_path/src/theme/colors.dart';
-import 'package:paisa_path/src/theme/styles.dart';
+import 'package:paisa_path/src/core/theme/colors.dart';
+import 'package:paisa_path/src/core/theme/styles.dart';
 
 class ExpenseEntryScreen extends StatefulWidget {
   final Expenses? expense;
@@ -47,30 +49,27 @@ class ExpenseEntryScreen extends StatefulWidget {
 }
 
 class _ExpenseEntryScreenState extends State<ExpenseEntryScreen> {
-  final TextEditingController typeController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController trnDateController = TextEditingController();
   final ExpensesController expensesController = Get.find();
-
-  ExpenseTypes expenseType = ExpenseTypes.empty();
 
   @override
   void initState() {
     super.initState();
+    expensesController.entryError('');
+    expensesController.entryExpenseType.value =
+        widget.expense?.expenseTypeId ?? 0;
+    trnDateController.text = DateTime.now().formatLocal();
     if (widget.expense != null) {
-      expenseType =
-          expensesController.getExpenseTypeById(widget.expense!.expenseTypeId);
-      typeController.text = expenseType.id == null
-          ? Strings.current.notSelected
-          : expenseType.name;
       amountController.text = widget.expense!.amount.roundIf();
       descriptionController.text = widget.expense!.description;
+      trnDateController.text = widget.expense!.trnDateTime.toDateLocal();
     }
   }
 
   @override
   void dispose() {
-    typeController.dispose();
     amountController.dispose();
     descriptionController.dispose();
     super.dispose();
@@ -141,32 +140,17 @@ class _ExpenseEntryScreenState extends State<ExpenseEntryScreen> {
                 ),
               ),
               Expanded(
-                child: EditBox(
-                  controller: typeController,
-                  readOnly: true,
-                  textAlign: TextAlign.start,
-                  labelText: Strings.current.type,
-                  suffixIcon: Icons.arrow_drop_down,
+                child: customDropdown(
+                  label: Strings.current.expenseType,
+                  value: expensesController.entryExpenseType.value,
+                  onChanged: (int? value) {
+                    expensesController.entryExpenseType(value ?? 0);
+                  },
+                  dropdownItems: [
+                    dropdownItem(Strings.current.notSelected, 0),
+                    ...expensesController.expenseTypes.toDropdownList(),
+                  ],
                 ),
-              ),
-            ],
-          ),
-
-          //show the date in a text and an edit button next to it
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  widget.expense == null
-                      ? DateTime.now().formatLocal()
-                      : widget.expense!.trnDateTime.formatLocal(),
-                  textAlign: TextAlign.end,
-                  style: textStyleContent,
-                ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.edit, color: appBarColorLight),
-                onPressed: () {},
               ),
             ],
           ),
@@ -175,18 +159,41 @@ class _ExpenseEntryScreenState extends State<ExpenseEntryScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              //getElevatedButton
-              getElevatedButton(
-                title: widget.expense == null
-                    ? Strings.current.save
-                    : Strings.current.update,
-                icon: const Icon(Icons.save),
-                onPressed: () => _saveExpense(),
-                width: 160,
-                height: 40,
+              Expanded(
+                child: DatePicker(
+                  label: Strings.current.from,
+                  controller: trnDateController,
+                ),
+              ),
+              Expanded(
+                child: getElevatedButton(
+                  title: widget.expense == null
+                      ? Strings.current.save
+                      : Strings.current.update,
+                  icon: const Icon(Icons.save),
+                  onPressed: () => _saveExpense(),
+                  width: 160,
+                  height: 40,
+                ),
               ),
             ],
           ),
+
+          GetX<ExpensesController>(builder: (controller) {
+            if (controller.entryError.isEmpty) {
+              return const SizedBox();
+            }
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                controller.entryError.value,
+                style: textStyleError.copyWith(
+                  color: fontColorError.theme,
+                ),
+              ),
+            );
+          }),
+
           const SizedBox(height: 16),
         ],
       ),
@@ -194,12 +201,13 @@ class _ExpenseEntryScreenState extends State<ExpenseEntryScreen> {
   }
 
   _saveExpense() async {
-    bool result = await expensesController.addOrUpdateExpense(
+    int result = await expensesController.addOrUpdateExpense(
         widget.expense,
         double.tryParse(amountController.text) ?? 0,
-        expenseType,
-        descriptionController.text);
-    if (result) {
+        expensesController.entryExpenseTypeValue,
+        descriptionController.text,
+        trnDateController.text.toDate());
+    if (result > 0) {
       Get.back(result: true);
     }
   }

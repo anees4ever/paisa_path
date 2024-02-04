@@ -1,4 +1,4 @@
-import 'package:paisa_path/src/theme/colors.dart';
+import 'package:paisa_path/src/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 const textStyleTitle = TextStyle(

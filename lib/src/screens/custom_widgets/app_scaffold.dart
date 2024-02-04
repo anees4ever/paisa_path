@@ -1,4 +1,4 @@
-import 'package:paisa_path/src/theme/dimens.dart';
+import 'package:paisa_path/src/core/theme/dimens.dart';
 import 'package:paisa_path/src/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,8 +50,7 @@ class _AppScaffoldState extends State<AppScaffold> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(appDefaultPadding, appDefaultPadding,
-            appDefaultPadding, appDefaultPadding * 3),
+        padding: const EdgeInsets.all(appDefaultPadding),
         child: widget.body,
       ),
       floatingActionButton: widget.floatingActionButton,

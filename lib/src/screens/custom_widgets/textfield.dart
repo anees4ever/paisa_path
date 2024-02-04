@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paisa_path/src/theme/colors.dart';
+import 'package:paisa_path/src/core/theme/colors.dart';
 
 const double controlHeight = 52;
 const double controlHeightDesktop = 60;

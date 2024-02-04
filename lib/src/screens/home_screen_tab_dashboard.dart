@@ -1,20 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paisa_path/src/controllers/expenses_controller.dart';
-import 'package:paisa_path/src/extentions/double.dart';
-import 'package:paisa_path/src/localization/flutter_lang.dart';
+import 'package:paisa_path/src/core/extentions/double.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.dart';
+import 'package:paisa_path/src/screens/custom_widgets/amount_view_card.dart';
 import 'package:paisa_path/src/screens/custom_widgets/buttons.dart';
-import 'package:paisa_path/src/screens/expenses_list_screen.dart';
-import 'package:paisa_path/src/theme/colors.dart';
-import 'package:paisa_path/src/theme/styles.dart';
+import 'package:paisa_path/src/screens/expense_entry_screen.dart';
+import 'package:paisa_path/src/screens/home_screen_tab_summary.dart';
+import 'package:paisa_path/src/core/theme/colors.dart';
+import 'package:paisa_path/src/core/theme/styles.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+  final Function(int page) callbackToSetPage;
+  const DashboardScreen({super.key, required this.callbackToSetPage});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        GetX<ExpensesController>(builder: (controller) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: AmountViewCard(
+                      Strings.current.today,
+                      controller.expenseTotalToday.value,
+                    ),
+                  ),
+                  Expanded(
+                    child: AmountViewCard(
+                      Strings.current.thisWeek,
+                      controller.expenseTotalThisWeek.value,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: AmountViewCard(
+                      Strings.current.thisMonth,
+                      controller.expenseTotalThisMonth.value,
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => callbackToSetPage(1),
+                      child: AspectRatio(
+                        aspectRatio: 2.5,
+                        child: Card(
+                          color: ChartColors.contentColorTeal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.pie_chart, color: fontColorDark),
+                              Text(Strings.current.summary,
+                                  style: textStyleTitle.copyWith(
+                                      color: fontColorDark)),
+                              const Icon(Icons.arrow_forward_ios,
+                                  color: fontColorDark),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        }),
+
+        const SizedBox(height: 16.0),
         //show title: today's expense
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,7 +96,7 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                Get.to(() => const ExpensesListScreen());
+                callbackToSetPage(2);
               },
             ),
           ],
@@ -91,6 +151,14 @@ class DashboardScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.edit,
+                                color: fontColorHightlightDark),
+                            onPressed: () async {
+                              await ExpenseEntryScreen.show(
+                                  controller.expensesToday[index]);
+                            },
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete,

@@ -7,6 +7,10 @@ abstract class ExpensesDao {
   @Query('SELECT * FROM expenses ORDER BY trnDateTime DESC')
   Future<List<Expenses>> listExpenses();
 
+  @Query(
+      'SELECT * FROM expenses WHERE DATE(trnDateTime) BETWEEN :fromDate AND :toDate ORDER BY trnDateTime DESC')
+  Future<List<Expenses>> listExpensesInPeriod(String fromDate, String toDate);
+
   @Query('SELECT * FROM expenses WHERE id = :id')
   Future<Expenses?> findExpenseById(int id);
 

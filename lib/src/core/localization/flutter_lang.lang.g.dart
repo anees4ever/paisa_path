@@ -1,6 +1,6 @@
 /*===========LANGUAGE CLASSES===========*/
 // DO NOT EDIT. This is code generated via package:flutter_lang 
-import 'package:paisa_path/src/localization/flutter_lang.core.g.dart'; 
+import 'package:paisa_path/src/core/localization/flutter_lang.core.g.dart'; 
 
   /// The translations for English (`en`). 
 final class FlutterLanguageEN extends FlutterLanguage { 
@@ -31,7 +31,13 @@ final class FlutterLanguageEN extends FlutterLanguage {
   String get update => "Update"; 
 
   @override 
-  String get type => "Type"; 
+  String get expenseType => "Expense type"; 
+
+  @override 
+  String get expenseTypes => "Expense types"; 
+
+  @override 
+  String get manage => "Manage %s"; 
 
   @override 
   String get delete => "Delete"; 
@@ -108,6 +114,45 @@ final class FlutterLanguageEN extends FlutterLanguage {
   @override 
   String get noExpenses => "No expenses yet. Keep it up!"; 
 
+  @override 
+  String get amountIsRequired => "Amount is required!"; 
+
+  @override 
+  String get invalidAmount => "Invalid amount!"; 
+
+  @override 
+  String get colorScheme => "Color Scheme"; 
+
+  @override 
+  String get light => "Light"; 
+
+  @override 
+  String get dark => "Dark"; 
+
+  @override 
+  String get restartApp => "Restart App"; 
+
+  @override 
+  String get ok => "OK"; 
+
+  @override 
+  String get language => "Language"; 
+
+  @override 
+  String get changeLanguageQuestion => "Do you want to set the language to %s?"; 
+
+  @override 
+  String get summary => "Summary"; 
+
+  @override 
+  String get recordYourExpenses => "Record your Expenses!"; 
+
+  @override 
+  String get recordYourExpensesMessage => "Record your daily expenses to keep track of your spending."; 
+
+  @override 
+  String get dailyReminderAt => "Daily Reminder at"; 
+
 } 
 
 
@@ -140,7 +185,13 @@ final class FlutterLanguageHI extends FlutterLanguage {
   String get update => "अपडेट करें"; 
 
   @override 
-  String get type => "प्रकार"; 
+  String get expenseType => "व्यय प्रकार"; 
+
+  @override 
+  String get expenseTypes => "व्यय प्रकार"; 
+
+  @override 
+  String get manage => "%s प्रबंधित करें"; 
 
   @override 
   String get delete => "हटाएं"; 
@@ -216,6 +267,45 @@ final class FlutterLanguageHI extends FlutterLanguage {
 
   @override 
   String get noExpenses => "अभी तक कोई व्यय नहीं। इसे जारी रखें!"; 
+
+  @override 
+  String get amountIsRequired => "रकम आवश्यक है!"; 
+
+  @override 
+  String get invalidAmount => "अमान्य रकम!"; 
+
+  @override 
+  String get colorScheme => "रंग योजना"; 
+
+  @override 
+  String get light => "प्रकाश"; 
+
+  @override 
+  String get dark => "अंधेरा"; 
+
+  @override 
+  String get restartApp => "ऐप फिर से शुरू करें"; 
+
+  @override 
+  String get ok => "ठीक है"; 
+
+  @override 
+  String get language => "भाषा"; 
+
+  @override 
+  String get changeLanguageQuestion => "क्या आप भाषा को %s पर सेट करना चाहते हैं?"; 
+
+  @override 
+  String get summary => "सारांश"; 
+
+  @override 
+  String get recordYourExpenses => "अपने व्यय दर्ज करें!"; 
+
+  @override 
+  String get recordYourExpensesMessage => "अपने दैनिक व्यय दर्ज करें ताकि आपके खर्च का पता चले।"; 
+
+  @override 
+  String get dailyReminderAt => "दैनिक याद दिलाने वाला"; 
 
 } 
 

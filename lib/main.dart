@@ -1,16 +1,21 @@
-import 'package:paisa_path/src/di.dart';
+import 'package:paisa_path/di.dart';
 import 'package:paisa_path/src/controllers/theme_controller.dart';
-import 'package:paisa_path/src/localization/flutter_lang.core.g.dart';
-import 'package:paisa_path/src/localization/flutter_lang.dart';
+import 'package:paisa_path/src/core/firebase/firebase_setup.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.core.g.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.dart';
 import 'package:paisa_path/src/screens/home_screen.dart';
-import 'package:paisa_path/src/theme/theme.dart';
+import 'package:paisa_path/src/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  //Dependant Injections and other initializations
   await DI.process();
+
+  //Initialize Firebase App, Crashlytics and FCM
+  await FirebaseSetup.initializeApp();
 
   runApp(const MyApp());
 }

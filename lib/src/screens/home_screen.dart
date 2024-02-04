@@ -1,11 +1,15 @@
+import 'package:flutter/foundation.dart';
+import 'package:paisa_path/src/controllers/summary_controller.dart';
 import 'package:paisa_path/src/screens/custom_widgets/update_check.dart';
-import 'package:paisa_path/src/localization/flutter_lang.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.dart';
 import 'package:paisa_path/src/screens/custom_widgets/app_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:paisa_path/src/screens/expense_entry_screen.dart';
 import 'package:paisa_path/src/screens/home_screen_tab_dashboard.dart';
+import 'package:paisa_path/src/screens/home_screen_tab_expenses_list.dart';
+import 'package:paisa_path/src/screens/home_screen_tab_settings.dart';
 import 'package:paisa_path/src/screens/home_screen_tab_summary.dart';
-import 'package:paisa_path/src/theme/colors.dart';
+import 'package:paisa_path/src/core/theme/colors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(
       title: Strings.current.appName,
-      changeStyle: true,
+      changeStyle: kDebugMode,
       body: Column(
         children: [
           Expanded(
@@ -39,11 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: _pageController,
                 allowImplicitScrolling: false,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [
-                  DashboardScreen(),
-                  SummaryScreen(),
-                  Text('Page 3'),
-                  Text('Page 4'),
+                children: [
+                  DashboardScreen(callbackToSetPage: callbackToSetPage),
+                  const SummaryScreen(),
+                  const ExpensesListScreen(),
+                  const SettingsScreen(),
                 ],
               ),
             ),
@@ -55,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () async {
           bool? result = await ExpenseEntryScreen.show(null);
           if (result ?? false) {
-            currentPage = 0;
+            SummaryController.refreshIf();
           }
         },
         shape: const CircleBorder(
@@ -69,35 +73,49 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        height: 48,
         shape: const CircularNotchedRectangle(), //shape of notch
-        notchMargin: 12,
+        notchMargin: 8,
         child: Row(
           //children inside bottom appbar
-          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              icon: const Icon(Icons.dashboard, color: fontColorHightlightDark),
+              icon: Icon(Icons.dashboard,
+                  color: currentPage == 0
+                      ? fontColorError.theme
+                      : fontColorHightlightDark),
               onPressed: () => currentPage = 0,
             ),
             IconButton(
-              icon: const Icon(Icons.add_chart, color: fontColorHightlightDark),
+              icon: Icon(Icons.pie_chart,
+                  color: currentPage == 1
+                      ? fontColorError.theme
+                      : fontColorHightlightDark),
               onPressed: () => currentPage = 1,
             ),
-            const SizedBox(width: 32),
+            const SizedBox.square(dimension: 32),
             IconButton(
-              icon: const Icon(Icons.list, color: fontColorHightlightDark),
+              icon: Icon(Icons.list,
+                  color: currentPage == 2
+                      ? fontColorError.theme
+                      : fontColorHightlightDark),
               onPressed: () => currentPage = 2,
             ),
             IconButton(
-              icon: const Icon(Icons.settings, color: fontColorHightlightDark),
+              icon: Icon(Icons.settings,
+                  color: currentPage == 3
+                      ? fontColorError.theme
+                      : fontColorHightlightDark),
               onPressed: () => currentPage = 3,
             ),
           ],
         ),
       ),
     );
+  }
+
+  callbackToSetPage(int page) {
+    currentPage = page;
   }
 
   set currentPage(int value) {
@@ -107,4 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
       curve: Curves.easeInOut,
     );
   }
+
+  int get currentPage =>
+      _pageController.hasClients ? _pageController.page?.round() ?? 0 : -1;
 }

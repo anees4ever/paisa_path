@@ -1,4 +1,5 @@
 import 'package:floor/floor.dart';
+import 'package:paisa_path/src/core/extentions/datetime.dart';
 
 //table structure for expenses with expense type, a description, amount, datetime and created and modified timestamps
 @Entity(tableName: 'expenses')
@@ -8,9 +9,9 @@ class Expenses {
   int expenseTypeId;
   String description;
   double amount;
-  DateTime trnDateTime;
-  DateTime createdAt;
-  DateTime modifiedAt;
+  String trnDateTime;
+  String createdAt;
+  String modifiedAt;
 
   Expenses({
     required this.id,
@@ -28,9 +29,9 @@ class Expenses {
           expenseTypeId: 0,
           description: '',
           amount: 0.0,
-          trnDateTime: DateTime.now(),
-          createdAt: DateTime.now(),
-          modifiedAt: DateTime.now(),
+          trnDateTime: DateTime.now().dbDateTime(),
+          createdAt: DateTime.now().dbDateTime(),
+          modifiedAt: DateTime.now().dbDateTime(),
         );
 
   @override

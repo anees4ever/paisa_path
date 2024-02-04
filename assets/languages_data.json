@@ -75,12 +75,28 @@
             "description": "Update button label"
         },
         {
-            "key": "type",
+            "key": "expenseType",
             "values": {
-                "en": "Type",
-                "hi": "प्रकार"
+                "en": "Expense type",
+                "hi": "व्यय प्रकार"
             },
             "description": "Type of Expense label in expense entry screen"
+        },
+        {
+            "key": "expenseTypes",
+            "values": {
+                "en": "Expense types",
+                "hi": "व्यय प्रकार"
+            },
+            "description": "Type of Expense label in expense entry screen"
+        },
+        {
+            "key": "manage",
+            "values": {
+                "en": "Manage %s",
+                "hi": "%s प्रबंधित करें"
+            },
+            "description": ""
         },
         {
             "key": "delete",
@@ -279,6 +295,110 @@
             "values": {
                 "en": "No expenses yet. Keep it up!",
                 "hi": "अभी तक कोई व्यय नहीं। इसे जारी रखें!"
+            },
+            "description": ""
+        },
+        {
+            "key": "amountIsRequired",
+            "values": {
+                "en": "Amount is required!",
+                "hi": "रकम आवश्यक है!"
+            },
+            "description": ""
+        },
+        {
+            "key": "invalidAmount",
+            "values": {
+                "en": "Invalid amount!",
+                "hi": "अमान्य रकम!"
+            },
+            "description": ""
+        },
+        {
+            "key": "colorScheme",
+            "values": {
+                "en": "Color Scheme",
+                "hi": "रंग योजना"
+            },
+            "description": ""
+        },
+        {
+            "key": "light",
+            "values": {
+                "en": "Light",
+                "hi": "प्रकाश"
+            },
+            "description": ""
+        },
+        {
+            "key": "dark",
+            "values": {
+                "en": "Dark",
+                "hi": "अंधेरा"
+            },
+            "description": ""
+        },
+        {
+            "key": "restartApp",
+            "values": {
+                "en": "Restart App",
+                "hi": "ऐप फिर से शुरू करें"
+            },
+            "description": ""
+        },
+        {
+            "key": "ok",
+            "values": {
+                "en": "OK",
+                "hi": "ठीक है"
+            },
+            "description": ""
+        },
+        {
+            "key": "language",
+            "values": {
+                "en": "Language",
+                "hi": "भाषा"
+            },
+            "description": ""
+        },
+        {
+            "key": "changeLanguageQuestion",
+            "values": {
+                "en": "Do you want to set the language to %s?",
+                "hi": "क्या आप भाषा को %s पर सेट करना चाहते हैं?"
+            },
+            "description": ""
+        },
+        {
+            "key": "summary",
+            "values": {
+                "en": "Summary",
+                "hi": "सारांश"
+            },
+            "description": ""
+        },
+        {
+            "key": "recordYourExpenses",
+            "values": {
+                "en": "Record your Expenses!",
+                "hi": "अपने व्यय दर्ज करें!"
+            },
+            "description": ""
+        },
+        {
+            "key": "recordYourExpensesMessage",
+            "values": {
+                "en": "Record your daily expenses to keep track of your spending.",
+                "hi": "अपने दैनिक व्यय दर्ज करें ताकि आपके खर्च का पता चले।"
+            },
+            "description": ""
+        },
+        {
+            "key": "dailyReminderAt",
+            "values": {
+                "en": "Daily Reminder at",
+                "hi": "दैनिक याद दिलाने वाला"
             },
             "description": ""
         }

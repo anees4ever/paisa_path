@@ -10,7 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:paisa_path/src/localization/flutter_lang.lang.g.dart';
+import 'package:paisa_path/src/core/localization/flutter_lang.lang.g.dart';
 
 abstract class FlutterLanguage {
   FlutterLanguage(String locale)
@@ -82,8 +82,16 @@ abstract class FlutterLanguage {
 
   /// Type of Expense label in expense entry screen
   ///
-  /// [en]: **'Type'**
-  String get type;
+  /// [en]: **'Expense type'**
+  String get expenseType;
+
+  /// Type of Expense label in expense entry screen
+  ///
+  /// [en]: **'Expense types'**
+  String get expenseTypes;
+
+  /// [en]: **'Manage %s'**
+  String get manage;
 
   /// [en]: **'Delete'**
   String get delete;
@@ -163,6 +171,45 @@ abstract class FlutterLanguage {
 
   /// [en]: **'No expenses yet. Keep it up!'**
   String get noExpenses;
+
+  /// [en]: **'Amount is required!'**
+  String get amountIsRequired;
+
+  /// [en]: **'Invalid amount!'**
+  String get invalidAmount;
+
+  /// [en]: **'Color Scheme'**
+  String get colorScheme;
+
+  /// [en]: **'Light'**
+  String get light;
+
+  /// [en]: **'Dark'**
+  String get dark;
+
+  /// [en]: **'Restart App'**
+  String get restartApp;
+
+  /// [en]: **'OK'**
+  String get ok;
+
+  /// [en]: **'Language'**
+  String get language;
+
+  /// [en]: **'Do you want to set the language to %s?'**
+  String get changeLanguageQuestion;
+
+  /// [en]: **'Summary'**
+  String get summary;
+
+  /// [en]: **'Record your Expenses!'**
+  String get recordYourExpenses;
+
+  /// [en]: **'Record your daily expenses to keep track of your spending.'**
+  String get recordYourExpensesMessage;
+
+  /// [en]: **'Daily Reminder at'**
+  String get dailyReminderAt;
 }
 
 class _FlutterLanguageDelegate extends LocalizationsDelegate<FlutterLanguage> {
