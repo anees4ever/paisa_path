@@ -2,6 +2,18 @@
 
 This is a Personal Expense Tracker application built using Flutter. The application is designed to help users manage and track their expenses effectively.
 
+## [Sample APK](preview/paisa_path.apk)
+
+## [Demo Video](preview/preview.mp4)
+
+## Preview
+| Theme | | | | |
+|---------|---------|---------|---------|---------|
+| Light | ![Preview 1](preview/home_light.png) | ![Preview 2](preview/summary_light.png) | ![Preview 3](preview/list_light.png) | ![Preview 3](preview/pref_light.png) |
+| Dark | ![Preview 1](preview/home_dark.png) | ![Preview 2](preview/summary_dark.png) | ![Preview 3](preview/list_dark.png) | ![Preview 3](preview/pref_dark.png) |
+
+
+
 ## Project Details
 1. State Management: 
     The application uses the GetX package for state management and Dependancy Injection. GetX is a high-performance, lightweight library for Flutter that provides a simple and scalable solution for managing the state of your application.

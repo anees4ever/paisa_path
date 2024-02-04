@@ -147,8 +147,7 @@ class ExpensesController extends GetxController {
 
   deleteExpense(Expenses expense) async {
     await DI.db.expensesDao.deleteExpense(expense);
-    expensesInAPeriod.removeWhere((element) => element.id == expense.id);
-    expensesToday.removeWhere((element) => element.id == expense.id);
+    loadExpenses();
   }
 
   ExpenseTypes getExpenseTypeById(int id) {
