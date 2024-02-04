@@ -48,6 +48,12 @@ class _AppScaffoldState extends State<AppScaffold> {
           if (widget.changeStyle) getAppStyleChanger(),
           ...widget.actions,
         ],
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(16),
+            bottomRight: Radius.circular(16),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(appDefaultPadding),

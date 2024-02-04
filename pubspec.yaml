@@ -19,7 +19,10 @@ dependencies:
     sdk: flutter
   intl: any
   flutter_lang:
-    path: ../flutter_lang/flutter_lang/
+    git:
+      url: https://github.com/anees4ever/flutter_lang.git
+      path: flutter_lang
+      #path: ../flutter_lang/flutter_lang/
   restart_app: ^1.2.1
   
   shared_preferences: ^2.2.2

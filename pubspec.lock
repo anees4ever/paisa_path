@@ -369,9 +369,11 @@ packages:
   flutter_lang:
     dependency: "direct main"
     description:
-      path: "../flutter_lang/flutter_lang"
-      relative: true
-    source: path
+      path: flutter_lang
+      ref: HEAD
+      resolved-ref: c7a659850351b5e551e4a8004deebe1c0328f3fa
+      url: "https://github.com/anees4ever/flutter_lang.git"
+    source: git
     version: "1.0.0"
   flutter_launcher_icons:
     dependency: "direct dev"
