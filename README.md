@@ -2,9 +2,13 @@
 
 This is a Personal Expense Tracker application built using Flutter. The application is designed to help users manage and track their expenses effectively.
 
-## [Sample APK](preview/paisa_path.apk)
 
-## [Demo Video](preview/preview.mp4)
+## APK Download
+Link to the apk file: <a href="https://raw.githubusercontent.com/anees4ever/paisa_path/main/preview/paisa_path.apk" >PaisaPath App</a>
+
+## Video Demo
+Link to the video: <a href="https://raw.githubusercontent.com/anees4ever/paisa_path/main/preview/preview.mp4" >Video Link</a>
+
 
 ## Preview
 | Theme | | | | |
