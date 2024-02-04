@@ -33,6 +33,7 @@ class SummaryController extends GetxController {
   }
 
   generateSummary() async {
+    updateFromToDates();
     List<ExpenseTypes> expenseTypes =
         Get.find<ExpensesController>().expenseTypes;
     List<Expenses> expenses = await DI.db.expensesDao

@@ -17,6 +17,10 @@ extension StringExt on String {
         : DateFormat('yyyy-MM-dd HH:mm:ss').parse(this);
   }
 
+  DateTime timeToDateTime() {
+    return isEmpty ? DateTime.now() : DateFormat('hh:mm a').parse(this);
+  }
+
   toDBDate() {
     return isEmpty ? '' : DateFormat('yyyy-MM-dd').format(toDate());
   }

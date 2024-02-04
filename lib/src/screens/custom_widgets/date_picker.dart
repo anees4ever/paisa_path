@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paisa_path/src/core/extentions/datetime.dart';
+import 'package:paisa_path/src/core/extentions/strings.dart';
 import 'package:paisa_path/src/screens/custom_widgets/textfield.dart';
 
 class DatePicker extends StatelessWidget {
@@ -50,12 +51,14 @@ class TimePicker extends StatelessWidget {
     this.onSelected,
     this.initialTime,
     this.controller,
+    this.textAlign,
   });
 
   final String label;
   final DateTime? initialTime;
   final void Function(DateTime?)? onSelected;
   final TextEditingController? controller;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +70,12 @@ class TimePicker extends StatelessWidget {
       labelText: label,
       readOnly: true,
       suffixIcon: Icons.access_time,
+      textAlign: textAlign ?? TextAlign.start,
       onTap: () async {
         TimeOfDay? newTime = await showTimePicker(
           context: context,
-          initialTime: initialTime != null
-              ? TimeOfDay.fromDateTime(initialTime!)
-              : TimeOfDay.now(),
+          initialTime:
+              TimeOfDay.fromDateTime(timeController.text.timeToDateTime()),
         );
         if (newTime != null) {
           DateTime newDate = DateTime(DateTime.now().year, DateTime.now().month,

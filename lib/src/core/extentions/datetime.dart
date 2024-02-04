@@ -36,6 +36,6 @@ extension DateTimeExt on DateTime {
   }
 
   String formattedTime() {
-    return format('HH:mm:ss');
+    return format('hh:mm a');
   }
 }

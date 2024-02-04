@@ -5,7 +5,6 @@ import 'package:paisa_path/di.dart';
 import 'package:paisa_path/src/core/extentions/datetime.dart';
 import 'package:paisa_path/src/core/localization/flutter_lang.core.g.dart';
 import 'package:paisa_path/src/core/localization/flutter_lang.dart';
-import 'package:paisa_path/src/screens/custom_widgets/buttons.dart';
 import 'package:paisa_path/src/screens/custom_widgets/date_picker.dart';
 import 'package:paisa_path/src/core/theme/colors.dart';
 import 'package:paisa_path/src/core/theme/styles.dart';
@@ -137,6 +136,7 @@ class SettingsScreen extends StatelessWidget {
               flex: 2,
               child: TimePicker(
                 label: '',
+                textAlign: TextAlign.center,
                 initialTime: DI.globals.dailyReminderTimeAsDate,
                 onSelected: (selectedTime) {
                   if (selectedTime != null) {
@@ -149,20 +149,19 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
 
-        const Divider(),
-
-        const SizedBox(height: 20),
-        //showing a button to open the expense type screen
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            getElevatedButton(
-              title: Strings.current.manage
-                  .withParam(Strings.current.expenseTypes),
-              onPressed: () => Get.toNamed('/expenseTypes'),
-            ),
-          ],
-        ),
+        // const Divider(),
+        // const SizedBox(height: 20),
+        ////showing a button to open the expense type screen
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.start,
+        //   children: [
+        //     getElevatedButton(
+        //       title: Strings.current.manage
+        //           .withParam(Strings.current.expenseTypes),
+        //       onPressed: () => Get.toNamed('/expenseTypes'),
+        //     ),
+        //   ],
+        // ),
       ],
     );
   }
