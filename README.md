@@ -24,7 +24,11 @@ This is a Personal Expense Tracker application built using Flutter. The applicat
 
 ## Upcoming Features
 
-### 1. Authentication: 
+### 1. Improvement: Clickable Expense Type Tiles:
+
+To enhance the user experience, the expense type tiles on the summary screen will be made clickable. When clicked, the user will be navigated to the expense list page with filters applied accordingly. This will allow users to quickly view the breakup of their expenses based on the selected expense type.
+
+### 2. Feature: Authentication: 
 
 The application will soon support authentication using biometric or FaceID. This feature will provide an additional layer of security and ensure that only authorized users can access the application.
 
