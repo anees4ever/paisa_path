@@ -69,26 +69,27 @@ class ExpensesController extends GetxController {
   }
 
   loadExpenses() async {
+    DateTime now = DateTime.now();
+
     expensesInAPeriod.value = await DI.db.expensesDao.listExpensesInPeriod(
         filterFromDate.value.dbDate(), filterToDate.value.dbDate());
     expensesToday.value = await DI.db.expensesDao
-        .listExpensesInPeriod(DateTime.now().dbDate(), DateTime.now().dbDate());
+        .listExpensesInPeriod(now.dbDate(), now.dbDate());
 
     expenseTotalToday.value = expensesToday.fold(0.0, (previousValue, element) {
       return previousValue + element.amount;
     });
     List<Expenses> expensesThisWeek = await DI.db.expensesDao
         .listExpensesInPeriod(
-            DateTime.now().subtract(const Duration(days: 7)).dbDate(),
-            DateTime.now().dbDate());
+            DateTime(now.year, now.month, now.day - now.weekday).dbDate(),
+            now.dbDate());
     expenseTotalThisWeek.value =
         expensesThisWeek.fold(0.0, (previousValue, element) {
       return previousValue + element.amount;
     });
     List<Expenses> expensesThisMonth = await DI.db.expensesDao
         .listExpensesInPeriod(
-            DateTime(DateTime.now().year, DateTime.now().month, 1).dbDate(),
-            DateTime.now().dbDate());
+            DateTime(now.year, now.month, 1).dbDate(), now.dbDate());
     expenseTotalThisMonth.value =
         expensesThisMonth.fold(0.0, (previousValue, element) {
       return previousValue + element.amount;
